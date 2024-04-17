@@ -1,0 +1,12 @@
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Prueba
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+    gcloud config set project chrome-mediator-420023 && \
+    gsutil ls
+
+options:
+  logging: CLOUD_LOGGING_ONLY
