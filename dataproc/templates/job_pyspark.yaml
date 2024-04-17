@@ -1,0 +1,15 @@
+jobs:
+- pysparkJob:
+    args:
+    - process_date
+    jarFileUris:
+    - gs://datalake-raw-poc/resources/recursos_dataproc_spark-bigquery-with-dependencies_2.12-0.30.0.jar
+    mainPythonFileUri: gs://datalake-raw-poc/resources/dataproc/01_ingest_currency.py
+    pythonFileUris:
+     - gs://datalake-raw-poc/resources/dataproc/utils.py
+  stepId: step_process_currency
+
+parameters:
+- name: PROCESS_DATE
+  fields:
+  - jobs['step_process_currency'].pysparkJob.args[0]

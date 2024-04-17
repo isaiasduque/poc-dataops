@@ -18,5 +18,18 @@ steps:
     gcloud config set project chrome-mediator-420023 && \
     bq query --use_legacy_sql=false "$(gsutil cat gs://datalake-raw-poc/resources/bigquery/01_tb_currency.sql)"
 
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Create dataproc ephemeral workflow 
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |    
+    gcloud dataproc workflow-templates import 01_process_pyspark \
+    --source=dataproc/templates/job_pyspark.yaml --region=us-central1 && \
+    gcloud dataproc workflow-templates set-managed-cluster 01_process_pyspark \
+    --cluster-name=process-pyspark \
+    --single-node \
+    --region=us-central1 
+
 options:
   logging: CLOUD_LOGGING_ONLY
