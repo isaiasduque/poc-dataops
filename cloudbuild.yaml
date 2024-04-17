@@ -1,22 +1,22 @@
 steps:
 
 - name: 'gcr.io/cloud-builders/gcloud'
-  id: Prueba
+  id: Copy Resources
   entrypoint: /bin/sh
   args:
   - '-c'
   - |
-    gcloud config set project chrome-mediator-420023 && \
-    gsutil ls
+    gsutil -m cp -r dataproc/jobs/*.py gs://datalake-raw-poc/resources/dataproc/ && \
+    gsutil -m cp -r schemas/*.sql gs://datalake-raw-poc/resources/bigquery/
 
 - name: 'gcr.io/cloud-builders/gcloud'
-  id: Copiar scripts
+  id: Create schemas
   entrypoint: /bin/sh
   args:
   - '-c'
   - |
     gcloud config set project chrome-mediator-420023 && \
-    gsutil -m cp -r scripts/*.py gs://datalake-raw-poc/CI
+    bq query --use_legacy_sql=false "$(gsutil cat gs://datalake-raw-poc/resources/bigquery/01_tb_currency.sql)"
 
 options:
   logging: CLOUD_LOGGING_ONLY
