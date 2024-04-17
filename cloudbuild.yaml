@@ -9,5 +9,14 @@ steps:
     gcloud config set project chrome-mediator-420023 && \
     gsutil ls
 
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Copiar scripts
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+    gcloud config set project chrome-mediator-420023 && \
+    gsutil -m cp -r scripts/*.py gs://datalake-raw-poc/CI
+
 options:
   logging: CLOUD_LOGGING_ONLY
