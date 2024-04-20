@@ -24,12 +24,12 @@ steps:
   args:
   - '-c'
   - |    
-    gcloud dataproc workflow-templates import 01_process_pyspark \
-    --source=dataproc/templates/job_pyspark.yaml --region=us-central1 && \
-    gcloud dataproc workflow-templates set-managed-cluster 01_process_pyspark \
-    --cluster-name=process-pyspark \
+    gcloud dataproc workflow-templates import 01_process_pyspark_test \
+    --source=dataproc/templates/job_pyspark.yaml --region=us-east4 && \
+    gcloud dataproc workflow-templates set-managed-cluster 01_process_pyspark_test \
+    --cluster-name=process-pyspark-test \
     --single-node \
-    --region=us-central1 
+    --region=us-east4
 
 options:
   logging: CLOUD_LOGGING_ONLY

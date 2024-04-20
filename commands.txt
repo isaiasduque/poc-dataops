@@ -1,1 +1,16 @@
+gcloud dataproc workflow-templates create 02_process_pyspark --region=us-east1
+
+gcloud dataproc workflow-templates instantiate 02_process_pyspark \
+    --region us-east1 \
+    --parameters PROCESS_DATE=2024-04-13
+
+----------------------------------------------------------------------------------    
+
+
 gcloud dataproc workflow-templates create 01_process_pyspark --region=us-central1
+
+gcloud dataproc workflow-templates create 01_process_pyspark_test --region=us-east4
+
+gcloud dataproc workflow-templates instantiate 01_process_pyspark \
+    --region us-central1 \
+    --parameters PROCESS_DATE=2024-04-13
