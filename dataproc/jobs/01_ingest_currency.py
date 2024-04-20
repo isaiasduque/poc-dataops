@@ -37,7 +37,7 @@ def run_job(project, process_date):
 
     return "PySpark Job Finished"
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     args = utils._parse_args()
     print('args:', args)
     project_gcp = 'chrome-mediator-420023'
